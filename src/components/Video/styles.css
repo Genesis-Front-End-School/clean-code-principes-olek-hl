@@ -1,0 +1,6 @@
+.preview-video-container {
+  height: 100%;
+}
+.preview-video-container video {
+  backdrop-filter: brightness(0.5);
+}
