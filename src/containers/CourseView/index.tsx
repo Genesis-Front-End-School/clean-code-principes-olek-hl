@@ -1,4 +1,9 @@
-import { useEffect, useState, useRef, RefObject } from "react";
+import {
+  useEffect,
+  useState,
+  useRef,
+  RefObject
+} from "react";
 import { useLocation } from "react-router-dom";
 import { bindActionCreators, Dispatch } from "redux";
 import { Typography, Divider, Chip } from "@material-ui/core";
@@ -6,7 +11,11 @@ import { Rating } from "@material-ui/lab";
 import { useTheme } from "@material-ui/core/styles";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import { connect, ConnectedProps } from "react-redux";
-import { Loader, VideoComponent, Lesson } from "../../components";
+import {
+  Loader,
+  VideoComponent,
+  Lesson
+} from "../../components";
 import { IRootState } from "../../store/models";
 import CourseViewActions from "./logic/actions";
 import { updateProgressInLocalStorage } from "./helpers";
@@ -121,6 +130,7 @@ const CourseView = ({ actions, courseData }: ICoursesOverview) => {
           onProgress={onVideoProgress}
         />
       </div>
+      
       <div className="course-view-wrapper">
         <div className="course-title-rating">
           <Typography
@@ -133,6 +143,7 @@ const CourseView = ({ actions, courseData }: ICoursesOverview) => {
           >
             {courseData.data?.title}
           </Typography>
+          
           <Rating
             value={courseData.data?.rating}
             readOnly
@@ -140,6 +151,7 @@ const CourseView = ({ actions, courseData }: ICoursesOverview) => {
             size={isSmall ? "small" : "large"}
           />
         </div>
+        
         {!isSmall && (
           <Chip
             label={`Playback Speed: ${playbackSpeed.replace(
@@ -148,6 +160,7 @@ const CourseView = ({ actions, courseData }: ICoursesOverview) => {
             )}. (Use 'l' button to speed up video or 'j' to slow it down)`}
           />
         )}
+        
         {!isSmall && (
           <div className="course-description">
             <Typography
@@ -161,7 +174,9 @@ const CourseView = ({ actions, courseData }: ICoursesOverview) => {
             </Typography>
           </div>
         )}
+        
         <Divider />
+        
         <div className="course-lossons-list">
           {courseData.data?.lessons.map((lesson) => (
             <Lesson
