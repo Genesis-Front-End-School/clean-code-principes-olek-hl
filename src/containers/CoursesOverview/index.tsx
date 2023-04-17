@@ -68,6 +68,7 @@ const Courses = ({ actions, courses }: ICoursesOverview) => {
           padding: isSmall ? "20px 30px" : "20px 100px",
         }}
       >
+         {/* гадаю не потрібно прописувати індекс і, він не використовується */}
         {data?.slice(0, corsesOnPage).map((course, i) => {
           return (
             <Grid key={`${course.id}`} item xs={12} sm={6} md={4} lg={3}>
