@@ -25,9 +25,11 @@ const VideoComponent = ({
   onProgress,
   muted = true,
   onVideoClick,
-}: IVideoProps) => {
-  return (
-    <div className="preview-video-container" onClick={() => onVideoClick?.()}>
+}: IVideoProps) => (
+    <div
+      className="preview-video-container"
+      onClick={() => onVideoClick?.()}
+    >
       <ReactHlsPlayer
         playerRef={playerRef}
         src={videoUrl}
@@ -46,6 +48,5 @@ const VideoComponent = ({
       />
     </div>
   );
-};
 
 export default VideoComponent;
