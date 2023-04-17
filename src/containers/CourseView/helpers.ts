@@ -11,6 +11,7 @@ export const updateProgressInLocalStorage = (
   const localStorage = window.localStorage;
   let savedProgress =
     JSON.parse(localStorage.getItem("progress") || "{}") || {};
+  // при зміні прогресу на одному відео, зчитується і зберігається прогрес одразу на всіх відео. Гадаю варто спробувати змінити логіку, щоб прогрес тільки одного конкретного відео зчитувався і зберігався.
   savedProgress = {
     ...savedProgress,
     courses: {
