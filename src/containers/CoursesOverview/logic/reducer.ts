@@ -4,6 +4,7 @@ import { initState } from "./state";
 import { ICoursesOvervieReducer } from "./models";
 
 export interface Actions extends Action {
+    // гадаю не варто використовувати тип any
   payload: any;
 }
 
