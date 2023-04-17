@@ -34,6 +34,7 @@ const Courses = ({ actions, courses }: ICoursesOverview) => {
     navigate(`/courses/${id}`);
   };
 // гадаю можна реструктуризувати courses перед цим рядком і використати реструктуризовану data
+  // гадаю варто використати < замість <=, тоді button не показуватиметься при показі всіх курсів
   const showLoadMoreButton = corsesOnPage <= (courses.data || []).length;
 
   const theme = useTheme();
