@@ -45,6 +45,7 @@ const CourseView = ({ actions, courseData }: ICoursesOverview) => {
   }, [actions, location.pathname]);
 
   useEffect(() => {
+    // гадаю варто змінити назву змінної на firsUnlockedLessonLink
     const firsUnlockedtLessonLink =
       courseData.data?.lessons?.find(
         (lesson) => lesson.status === LessonStatus.Unlocked
