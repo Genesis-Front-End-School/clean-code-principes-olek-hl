@@ -1,3 +1,4 @@
+// гадаю варто видалити з імпорту те що не використовується (useState, useEffect, Divider)
 import { useState, useMemo, useEffect } from "react";
 import { Typography, Divider, Chip } from "@material-ui/core";
 import { LockClock, Pause, PlayCircle } from "@mui/icons-material";
