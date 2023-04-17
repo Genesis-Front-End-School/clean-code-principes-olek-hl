@@ -58,6 +58,7 @@ const CourseView = ({ actions, courseData }: ICoursesOverview) => {
       if (!playerRef.current) {
         return;
       }
+       // гадаю варто використати оператор break після кожного виконаного case
       switch (e.key) {
         case videoSpeedUpKey:
           playerRef.current.playbackRate = Math.min(
