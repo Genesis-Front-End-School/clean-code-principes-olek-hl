@@ -18,7 +18,7 @@ export interface ICourseLessonProps {
   isCurrentlyPlaying: (link: string) => boolean;
   handleLessonClick: (link: string) => void;
 }
-
+// гадаю варто змінити назву компоненту на CourseLesson
 const CourceLesson = (props: ICourseLessonProps) => {
   const {
     lesson: { id, title, duration, order, status, link, previewImageLink },
