@@ -18,6 +18,7 @@ function* callMakeHttpRequest(action: any): any {
   const {
     payload: { route, type: actionType },
   } = action;
+   // гадаю наступний рядок не обов'язковий і його можна видалити
   const localStorage = window.localStorage;
   let token = localStorage.getItem("token");
   try {
