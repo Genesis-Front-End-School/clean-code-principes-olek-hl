@@ -11,6 +11,7 @@ export interface IVideoProps {
   muted?: boolean;
   position?: "static" | "relative" | "absolute" | "sticky" | "fixed";
   styles?: React.CSSProperties;
+    // гадаю не варто використовувати тип any
   playerRef: any;
   onVideoClick?: () => void;
   onProgress?: (e: any) => void;
