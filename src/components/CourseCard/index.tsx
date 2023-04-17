@@ -77,6 +77,7 @@ const CourceCard = (props: ICourseCardProps) => {
             style={{ marginTop: 5, position: "static" }}
           />
         </div>
+        {/* гадаю варто показати кількість уроків в курсі, так як вказано в тестовому завданні */}
         <div className="course-tags">
           {courseData.tags.map((tag, i) => {
             return <Chip key={i} label={tag} style={{ marginRight: 5 }} />;
