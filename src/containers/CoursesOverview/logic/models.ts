@@ -1,3 +1,4 @@
+// гадаю варто виправити помилку в назві на ICoursesOverviewReducer
 export interface ICoursesOvervieReducer {
   data: ICourseInfo[] | null;
   isFetching: boolean;
