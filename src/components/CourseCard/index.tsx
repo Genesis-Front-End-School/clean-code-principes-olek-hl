@@ -11,6 +11,7 @@ export interface ICourseCardProps {
   onCourseClick: (id: string) => void;
 }
 // гадаю варто виправити назву компоненту на CourseCard
+// гадаю варто деструктуризувати props одразу при отриманні компонентом аргументу
 const CourceCard = (props: ICourseCardProps) => {
   const [isHovered, setIsHovered] = useState(false);
   const playerRef: RefObject<HTMLVideoElement> = useRef(null);
