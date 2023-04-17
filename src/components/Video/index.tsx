@@ -1,3 +1,4 @@
+// гадаю варто видалити нижній рядок який не використовується
 import { useRef, RefObject } from "react";
 import ReactHlsPlayer from "react-hls-player";
 
