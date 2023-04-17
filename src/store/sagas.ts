@@ -13,7 +13,7 @@ function* callValidateJsonResponse(resObj: Response): any {
     return {};
   }
 }
-
+// гадаю не варто використовувати тип any
 function* callMakeHttpRequest(action: any): any {
   const {
     payload: { route, type: actionType },
