@@ -33,7 +33,7 @@ const Courses = ({ actions, courses }: ICoursesOverview) => {
   const onCourseClick = (id: string) => {
     navigate(`/courses/${id}`);
   };
-
+// гадаю можна реструктуризувати courses перед цим рядком і використати реструктуризовану data
   const showLoadMoreButton = corsesOnPage <= (courses.data || []).length;
 
   const theme = useTheme();
