@@ -10,7 +10,7 @@ export interface ICourseCardProps {
   courseData: ICourseInfo;
   onCourseClick: (id: string) => void;
 }
-
+// гадаю варто виправити назву компоненту на CourseCard
 const CourceCard = (props: ICourseCardProps) => {
   const [isHovered, setIsHovered] = useState(false);
   const playerRef: RefObject<HTMLVideoElement> = useRef(null);
