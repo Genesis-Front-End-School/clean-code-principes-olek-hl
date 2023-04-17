@@ -1,6 +1,19 @@
-import { useState, useMemo, useEffect } from "react";
-import { Typography, Divider, Chip } from "@material-ui/core";
-import { LockClock, Pause, PlayCircle } from "@mui/icons-material";
+import {
+  useState,
+  useMemo,
+  useEffect,
+  FC
+} from "react";
+import {
+  Typography,
+  Divider,
+  Chip
+} from "@material-ui/core";
+import {
+  LockClock,
+  Pause,
+  PlayCircle
+} from "@mui/icons-material";
 import { toMinutesAndSeconds } from "../../services";
 import {
   ICourseLesson,
@@ -18,16 +31,23 @@ export interface ICourseLessonProps {
   handleLessonClick: (link: string) => void;
 }
 
-const CourceLesson = (props: ICourseLessonProps) => {
-  const {
-    lesson: { id, title, duration, order, status, link, previewImageLink },
+const CourceLesson: FC<ICourseLessonProps> = (
+  lesson: {
+      id,
+      title,
+      duration,
+      order,
+      status,
+      link,
+      previewImageLink
+    },
     courseId,
     paused,
     isSmall,
     isCurrentlyPlaying,
-    handleLessonClick,
-  } = props;
-
+    handleLessonClick
+) => {
+  
   const isLocked = status === LessonStatus.Locked;
 
   const isPlaying = isCurrentlyPlaying(link);
@@ -57,10 +77,13 @@ const CourceLesson = (props: ICourseLessonProps) => {
     <div
       className={`course-lesson-wrapper ${isLocked ? "locked" : ""} ${
         isSmall ? "small-size" : ""
-      }`}
+      }`} // use classNames for better readability
       onClick={() => (isLocked ? null : handleLessonClick(link))}
     >
-      <div className="lesson-status-cell cell">{lessonStatusIcon}</div>
+      <div className="lesson-status-cell cell">
+        {lessonStatusIcon}
+      </div>
+      
       {!isSmall && (
         <div className="lesson-duration-cell cell">
           <Typography
@@ -103,10 +126,14 @@ const CourceLesson = (props: ICourseLessonProps) => {
         </Typography>
       </div>
       <div className="lesson-progress-cell cell">
-        <Typography variant="caption" component="span">
+        <Typography
+          variant="caption"
+          component="span"
+        >
           {`${isSmall ? "" : "Progress: "}${progressValue}%`}
         </Typography>
       </div>
+      
       {!isSmall && (
         <div className="lesson-currently-playing cell">
           {isPlaying && <Chip label="Currently playing" color={"secondary"} />}
