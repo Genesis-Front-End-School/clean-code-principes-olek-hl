@@ -6,13 +6,10 @@ export interface ILoaderProps {
   isFullPage?: boolean;
 }
 
-const Loader = (props: ILoaderProps) => {
-  const { isFullPage } = props;
-  return (
+const Loader: FC<ILoaderProps> = ({ isFullPage }) => (
     <div className={isFullPage ? "full-page-loader" : ""}>
       <CircularProgress />
     </div>
   );
-};
 
 export default Loader;
