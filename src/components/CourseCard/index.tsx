@@ -73,7 +73,7 @@ const CourceCard: FC<ICourseCardProps> = ({ courseData, onCourseClick }) => {
               WebkitLineClamp: "1",
               WebkitBoxOrient: "vertical",
               margin: "5px 2px",
-            }} // split css into separate file for easier maintenance
+            }}
           >
             {courseData?.title}
           </Typography>
