@@ -49,6 +49,7 @@ const CourceLesson = (props: ICourseLessonProps) => {
     }
     const localStorage = window.localStorage;
     const userProgress = JSON.parse(localStorage.getItem("progress") || "{}");
+        // гадаю варто змінити назву змінної на currentLessonProgress
     const curentLessonProgress =
       userProgress?.courses?.[courseId]?.[id]?.progress;
     return curentLessonProgress ?? 0;
