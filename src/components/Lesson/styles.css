@@ -1,0 +1,47 @@
+.course-lesson-wrapper {
+  display: flex;
+  align-items: center;
+  height: 30px;
+  padding: 10px 0;
+  border-bottom: 1px solid #888;
+  cursor: pointer;
+  position: relative;
+}
+.course-lesson-wrapper.locked {
+  cursor: default;
+  opacity: 0.3;
+}
+.course-lesson-wrapper.small-size .lesson-title-cell {
+  width: 70%;
+}
+.course-lesson-wrapper.small-size .lesson-progress-cell {
+  text-align: right;
+  width: 20%;
+}
+.lesson-status-cell {
+  width: 5%;
+  display: flex;
+  justify-content: center;
+  margin-right: 10px;
+}
+.lesson-duration-cell {
+  width: 7%;
+}
+.lesson-image-cell {
+  height: 100%;
+  width: 8%;
+}
+.lesson-image-cell img {
+  height: 100%;
+}
+.lesson-title-cell {
+  width: 55%;
+  display: flex;
+  align-items: center;
+}
+.lesson-progress-cell {
+  width: 15%;
+}
+.lesson-currently-playing {
+  width: 10%;
+}
