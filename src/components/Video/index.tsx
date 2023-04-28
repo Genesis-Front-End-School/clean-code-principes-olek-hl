@@ -1,4 +1,3 @@
-import { useRef, RefObject } from "react";
 import ReactHlsPlayer from "react-hls-player";
 
 import "./styles.css";

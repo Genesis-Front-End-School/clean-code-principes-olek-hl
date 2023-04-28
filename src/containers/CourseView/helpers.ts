@@ -1,4 +1,4 @@
-import { ICourseLesson } from "./logic/models";
+import { ICourseLesson, IGetLessonProgressArgs } from "./logic/models";
 
 export const updateProgressInLocalStorage = (
   currentTime: number,
@@ -34,4 +34,19 @@ export const updateProgressInLocalStorage = (
     },
   };
   localStorage.setItem("progress", JSON.stringify(savedProgress));
+};
+
+export const getLessonProgressValue = ({
+  link,
+  courseId,
+  lessonId,
+}: IGetLessonProgressArgs): number => {
+  if (!link) {
+    return 0;
+  }
+  const localStorage = window.localStorage;
+  const userProgress = JSON.parse(localStorage.getItem("progress") || "{}");
+  const curentLessonProgress =
+    userProgress?.courses?.[courseId]?.[lessonId]?.progress;
+  return curentLessonProgress ?? 0;
 };

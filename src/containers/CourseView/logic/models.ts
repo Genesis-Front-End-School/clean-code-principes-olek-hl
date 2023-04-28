@@ -45,3 +45,9 @@ export enum LessonStatus {
   Locked = "locked",
   Unlocked = "unlocked",
 }
+
+export interface IGetLessonProgressArgs {
+  link: string;
+  courseId: string;
+  lessonId: string;
+}

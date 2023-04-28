@@ -16,6 +16,7 @@ import {
   videoSpeedDownKey,
   MAX_PLAYBACK_RATE,
   MIN_PLAYBACK_RATE,
+  playbackRateCaption,
 } from "./config";
 import { ICourseViewReducer, LessonStatus } from "./logic/models";
 
@@ -28,7 +29,7 @@ export interface ICoursesOverview extends ConnectedProps<typeof connector> {
 
 const CourseView = ({ actions, courseData }: ICoursesOverview) => {
   const [videoLink, setVideoLink] = useState("");
-  const [paused, setPaused] = useState(false);
+  const [isVideoPaused, setPaused] = useState(false);
   const [playbackSpeed, setPlaybackSpeed] = useState<string>("Normal");
   const location = useLocation();
   const theme = useTheme();
@@ -140,14 +141,7 @@ const CourseView = ({ actions, courseData }: ICoursesOverview) => {
             size={isSmall ? "small" : "large"}
           />
         </div>
-        {!isSmall && (
-          <Chip
-            label={`Playback Speed: ${playbackSpeed.replace(
-              "1.00",
-              "Normal"
-            )}. (Use 'l' button to speed up video or 'j' to slow it down)`}
-          />
-        )}
+        {!isSmall && <Chip label={playbackRateCaption(playbackSpeed)} />}
         {!isSmall && (
           <div className="course-description">
             <Typography
@@ -168,10 +162,11 @@ const CourseView = ({ actions, courseData }: ICoursesOverview) => {
               key={lesson.id}
               courseId={courseId}
               lesson={lesson}
-              paused={paused}
+              isPaused={isVideoPaused}
               isCurrentlyPlaying={isCurrentlyPlaying}
               handleLessonClick={handleLessonClick}
               isSmall={isSmall}
+              isLocked={lesson.status === LessonStatus.Locked}
             />
           ))}
         </div>
