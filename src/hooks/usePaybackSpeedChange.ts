@@ -1,10 +1,10 @@
 import { useState, useEffect, RefObject } from "react";
 
-export const videoSpeedUpKey = "l";
-export const videoSpeedDownKey = "j";
+export const videoSpeedUpKey: string = "l";
+export const videoSpeedDownKey: string = "j";
 
-export const MAX_PLAYBACK_RATE = 16;
-export const MIN_PLAYBACK_RATE = 0.25;
+export const MAX_PLAYBACK_RATE: number = 16;
+export const MIN_PLAYBACK_RATE: number = 0.25;
 
 const usePaybackSpeedChange = (playerRef: RefObject<HTMLVideoElement>) => {
   const [playbackSpeed, setPlaybackSpeed] = useState<string>("Normal");

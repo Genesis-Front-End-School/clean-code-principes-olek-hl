@@ -1,12 +1,15 @@
 import { takeLatest, put } from "redux-saga/effects";
 import * as types from "./types";
 import { routes } from "../../../api/routes";
-import CommonActions from "../../../store/actions";
+import { Actions as commonAction } from "../../../store/actions";
+import { CourseViewActions } from "./actions";
 
-function* callGetCourseData(action: any) {
+function* callGetCourseData(
+  action: ReturnType<(typeof CourseViewActions)["getCourceData"]>
+) {
   try {
     yield put(
-      CommonActions.makeHttpRequest(
+      commonAction.makeHttpRequest(
         routes.getCourseData(action.payload.courseId),
         types.GET_COURSE_DATA_DONE
       )

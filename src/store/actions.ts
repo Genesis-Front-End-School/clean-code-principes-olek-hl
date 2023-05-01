@@ -1,6 +1,7 @@
 import * as types from "./types";
+import { ActionsUnion } from "./models";
 
-const CommonActions = {
+export const Actions = {
   makeHttpRequest: (route: string, type: string) => ({
     type: types.MAKE_HTTP_REQUEST,
     payload: { route, type },
@@ -10,4 +11,4 @@ const CommonActions = {
   }),
 };
 
-export default CommonActions;
+export type ActionsType = ActionsUnion<typeof Actions>;

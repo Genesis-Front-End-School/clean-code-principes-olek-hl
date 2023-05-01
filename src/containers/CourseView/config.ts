@@ -1,4 +1,4 @@
-export const smallScreenStyles = {
+export const smallScreenStyles: React.CSSProperties = {
   overflow: "hidden",
   textOverflow: "ellipsis",
   display: "-webkit-box",
@@ -6,7 +6,7 @@ export const smallScreenStyles = {
   WebkitBoxOrient: "vertical" as "vertical",
 };
 
-export const playbackRateCaption = (playbackSpeed: string) => {
+export const playbackRateCaption = (playbackSpeed: string): string => {
   return `Playback Speed: ${playbackSpeed.replace(
     "1.00",
     "Normal"
