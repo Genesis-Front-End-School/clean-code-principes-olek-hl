@@ -10,16 +10,11 @@ import { Loader, VideoComponent, Lesson } from "../../components";
 import { IRootState } from "../../store/models";
 import CourseViewActions from "./logic/actions";
 import { updateProgressInLocalStorage } from "./helpers";
-import {
-  smallScreenStyles,
-  videoSpeedUpKey,
-  videoSpeedDownKey,
-  MAX_PLAYBACK_RATE,
-  MIN_PLAYBACK_RATE,
-} from "./config";
+import { smallScreenStyles, playbackRateCaption } from "./config";
 import { ICourseViewReducer, LessonStatus } from "./logic/models";
 
 import "./styles.css";
+import usePaybackSpeedChange from "../../hooks/usePaybackSpeedChange";
 
 export interface ICoursesOverview extends ConnectedProps<typeof connector> {
   actions: typeof CourseViewActions;
@@ -28,12 +23,12 @@ export interface ICoursesOverview extends ConnectedProps<typeof connector> {
 
 const CourseView = ({ actions, courseData }: ICoursesOverview) => {
   const [videoLink, setVideoLink] = useState("");
-  const [paused, setPaused] = useState(false);
-  const [playbackSpeed, setPlaybackSpeed] = useState<string>("Normal");
+  const [isVideoPaused, setPaused] = useState(false);
   const location = useLocation();
   const theme = useTheme();
   const isSmall = useMediaQuery(theme.breakpoints.down("sm"));
   const playerRef: RefObject<HTMLVideoElement> = useRef(null);
+  const playbackSpeed = usePaybackSpeedChange(playerRef);
 
   const courseId = location.pathname.split("/").pop() || "";
 
@@ -51,30 +46,6 @@ const CourseView = ({ actions, courseData }: ICoursesOverview) => {
       )?.link || "";
     setVideoLink(firsUnlockedtLessonLink);
   }, [courseData.data]);
-
-  useEffect(() => {
-    window.addEventListener("keydown", (e) => {
-      if (!playerRef.current) {
-        return;
-      }
-      switch (e.key) {
-        case videoSpeedUpKey:
-          playerRef.current.playbackRate = Math.min(
-            playerRef.current.playbackRate + 0.5,
-            MAX_PLAYBACK_RATE
-          );
-          setPlaybackSpeed(`${playerRef.current.playbackRate.toFixed(2)}`);
-        case videoSpeedDownKey:
-          playerRef.current.playbackRate = Math.max(
-            playerRef.current.playbackRate - 0.25,
-            MIN_PLAYBACK_RATE
-          );
-          setPlaybackSpeed(`${playerRef.current.playbackRate.toFixed(2)}`);
-        default:
-          return;
-      }
-    });
-  }, []);
 
   const { isFetching, data } = courseData;
 
@@ -140,14 +111,7 @@ const CourseView = ({ actions, courseData }: ICoursesOverview) => {
             size={isSmall ? "small" : "large"}
           />
         </div>
-        {!isSmall && (
-          <Chip
-            label={`Playback Speed: ${playbackSpeed.replace(
-              "1.00",
-              "Normal"
-            )}. (Use 'l' button to speed up video or 'j' to slow it down)`}
-          />
-        )}
+        {!isSmall && <Chip label={playbackRateCaption(playbackSpeed)} />}
         {!isSmall && (
           <div className="course-description">
             <Typography
@@ -168,10 +132,11 @@ const CourseView = ({ actions, courseData }: ICoursesOverview) => {
               key={lesson.id}
               courseId={courseId}
               lesson={lesson}
-              paused={paused}
+              isPaused={isVideoPaused}
               isCurrentlyPlaying={isCurrentlyPlaying}
               handleLessonClick={handleLessonClick}
               isSmall={isSmall}
+              isLocked={lesson.status === LessonStatus.Locked}
             />
           ))}
         </div>

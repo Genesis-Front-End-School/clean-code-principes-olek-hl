@@ -1,8 +1,10 @@
 import { useState, useRef, RefObject } from "react";
-import { Typography, Divider, Chip } from "@material-ui/core";
-import { Rating } from "@material-ui/lab";
+import { Typography, Divider } from "@material-ui/core";
+import { commonTypoStyles } from "./config";
 import VideoComponent from "../Video";
 import { ICourseInfo } from "../../containers/CoursesOverview/logic/models";
+import CourseCardPreview from "./CardPreview";
+import CourseCardDetails from "./CardDetails";
 
 import "./styles.css";
 
@@ -23,12 +25,10 @@ const CourceCard = (props: ICourseCardProps) => {
     setIsHovered(false);
   };
 
-  const onImageError = (e: any) => {
-    e.target.src =
-      "https://img.freepik.com/free-vector/online-education-flat-illustration-composition-with-computers-content-books-with-human-characters_1284-54101.jpg";
-  };
-
-  const { courseData, onCourseClick } = props;
+  const {
+    courseData: { title, meta, id, previewImageLink, rating, tags },
+    onCourseClick,
+  } = props;
 
   return (
     <div
@@ -38,49 +38,20 @@ const CourceCard = (props: ICourseCardProps) => {
     >
       {isHovered && (
         <VideoComponent
-          videoUrl={courseData?.meta.courseVideoPreview?.link}
-          onVideoClick={() => onCourseClick(courseData.id)}
+          videoUrl={meta.courseVideoPreview?.link}
+          onVideoClick={() => onCourseClick(id)}
           playerRef={playerRef}
         />
       )}
       <div className="card-container">
-        <div className="card-preview">
-          <img
-            src={`${courseData?.previewImageLink}/cover.webp`}
-            alt="corse-previe-img"
-            onError={onImageError}
-          />
-        </div>
+        <CourseCardPreview previewImageLink={previewImageLink} />
         <Divider />
         <div className="course-title">
-          <Typography
-            variant="h6"
-            component="div"
-            style={{
-              overflow: "hidden",
-              textOverflow: "ellipsis",
-              display: "-webkit-box",
-              WebkitLineClamp: "1",
-              WebkitBoxOrient: "vertical",
-              margin: "5px 2px",
-            }}
-          >
-            {courseData?.title}
+          <Typography variant="h6" component="div" style={commonTypoStyles}>
+            {title}
           </Typography>
         </div>
-        <div className="course-details">
-          <Divider />
-          <Rating
-            value={courseData?.rating}
-            readOnly
-            style={{ marginTop: 5, position: "static" }}
-          />
-        </div>
-        <div className="course-tags">
-          {courseData.tags.map((tag, i) => {
-            return <Chip key={i} label={tag} style={{ marginRight: 5 }} />;
-          })}
-        </div>
+        <CourseCardDetails rating={rating} tags={tags} />
       </div>
     </div>
   );
