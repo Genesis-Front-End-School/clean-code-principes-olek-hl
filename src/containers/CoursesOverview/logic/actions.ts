@@ -1,9 +1,10 @@
 import * as types from "./types";
+import { ActionsUnion } from "../../../store/models";
 
-const CoursesOverviewActions = {
+export const CoursesOverviewActions = {
   getCourcesOverview: () => ({
     type: types.GET_COURSES_OVERVIEW,
   }),
 };
 
-export default CoursesOverviewActions;
+export type ActionsType = ActionsUnion<typeof CoursesOverviewActions>;

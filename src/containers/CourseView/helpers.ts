@@ -1,10 +1,14 @@
-import { ICourseLesson, IGetLessonProgressArgs } from "./logic/models";
+import {
+  ICourseLesson,
+  IGetLessonProgressArgs,
+  ICourseProgress,
+} from "./logic/models";
 
-export const getLocalStorage = () => {
+export const getLocalStorage = (): Storage => {
   return window.localStorage;
 };
 
-export const getLocalStorageItem = (item: string) => {
+export const getLocalStorageItem = (item: string): string => {
   return getLocalStorage().getItem(item) || "{}";
 };
 
@@ -12,7 +16,10 @@ export const getParsedLocalStorageItem = (item: string) => {
   return JSON.parse(getLocalStorageItem(item)) || {};
 };
 
-export const setLocalStorageItem = (item: string, data: object) => {
+export const setLocalStorageItem = (
+  item: string,
+  data: ICourseProgress
+): void => {
   getLocalStorage().setItem(item, JSON.stringify(data));
 };
 
@@ -20,7 +27,7 @@ export const calculateLessonProgress = (
   currentTime: number,
   currentLesson: ICourseLesson,
   prevProgress: string
-) => {
+): string => {
   return Math.max(
     (currentTime / (currentLesson?.duration || Infinity)) * 100,
     Number(prevProgress || "0")
@@ -31,7 +38,7 @@ export const updateProgressInLocalStorage = (
   currentTime: number,
   currentCourseId: string,
   currentLesson?: ICourseLesson
-) => {
+): void => {
   if (!currentLesson) {
     return;
   }

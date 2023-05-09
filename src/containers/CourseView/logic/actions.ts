@@ -1,6 +1,7 @@
 import * as types from "./types";
+import { ActionsUnion } from "../../../store/models";
 
-const CourseViewActions = {
+export const CourseViewActions = {
   getCourceData: (courseId: string) => ({
     type: types.GET_COURSE_DATA,
     payload: { courseId },
@@ -10,4 +11,4 @@ const CourseViewActions = {
   }),
 };
 
-export default CourseViewActions;
+export type ActionsType = ActionsUnion<typeof CourseViewActions>;

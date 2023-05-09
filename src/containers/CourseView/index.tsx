@@ -8,29 +8,29 @@ import useMediaQuery from "@material-ui/core/useMediaQuery";
 import { connect, ConnectedProps } from "react-redux";
 import { Loader, VideoComponent, Lesson } from "../../components";
 import { IRootState } from "../../store/models";
-import CourseViewActions from "./logic/actions";
+import { CourseViewActions } from "./logic/actions";
 import { updateProgressInLocalStorage } from "./helpers";
 import { smallScreenStyles, playbackRateCaption } from "./config";
 import { ICourseViewReducer, LessonStatus } from "./logic/models";
+import usePaybackSpeedChange from "../../hooks/usePaybackSpeedChange";
 
 import "./styles.css";
-import usePaybackSpeedChange from "../../hooks/usePaybackSpeedChange";
 
 export interface ICoursesOverview extends ConnectedProps<typeof connector> {
   actions: typeof CourseViewActions;
   courseData: ICourseViewReducer;
 }
 
-const CourseView = ({ actions, courseData }: ICoursesOverview) => {
+const CourseView = ({ actions, courseData }: ICoursesOverview): JSX.Element => {
   const [videoLink, setVideoLink] = useState("");
   const [isVideoPaused, setPaused] = useState(false);
   const location = useLocation();
   const theme = useTheme();
-  const isSmall = useMediaQuery(theme.breakpoints.down("sm"));
+  const isSmall: boolean = useMediaQuery(theme.breakpoints.down("sm"));
   const playerRef: RefObject<HTMLVideoElement> = useRef(null);
-  const playbackSpeed = usePaybackSpeedChange(playerRef);
+  const playbackSpeed: string = usePaybackSpeedChange(playerRef);
 
-  const courseId = location.pathname.split("/").pop() || "";
+  const courseId: string = location.pathname.split("/").pop() || "";
 
   useEffect(() => {
     actions.getCourceData(courseId);
@@ -49,11 +49,11 @@ const CourseView = ({ actions, courseData }: ICoursesOverview) => {
 
   const { isFetching, data } = courseData;
 
-  const isCurrentlyPlaying = (link: string) => {
+  const isCurrentlyPlaying = (link: string): boolean => {
     return link === videoLink;
   };
 
-  const handleLessonClick = (link: string) => {
+  const handleLessonClick = (link: string): void => {
     if (!link) {
       return;
     }
@@ -67,7 +67,7 @@ const CourseView = ({ actions, courseData }: ICoursesOverview) => {
     setVideoLink(link);
   };
 
-  const onVideoProgress = (e: any) => {
+  const onVideoProgress = (e: React.ChangeEvent<HTMLVideoElement>): void => {
     const currentTime = e.target?.currentTime;
     const currentLesson = courseData.data?.lessons.find(
       (lesson) => lesson.link === videoLink

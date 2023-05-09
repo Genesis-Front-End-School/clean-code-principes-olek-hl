@@ -4,8 +4,11 @@ import coursesOverviewSaga from "../containers/CoursesOverview/logic/saga";
 import courseViewSaga from "../containers/CourseView/logic/saga";
 import { host, apiVersion } from "../api/config";
 import { routes } from "../api/routes";
+import { Actions as commonActions } from "./actions";
 
-function* callValidateJsonResponse(resObj: Response): any {
+function* callValidateJsonResponse(
+  resObj: Response
+): Generator<unknown, unknown, unknown> {
   try {
     const response = yield resObj.json();
     return response;
@@ -14,7 +17,9 @@ function* callValidateJsonResponse(resObj: Response): any {
   }
 }
 
-function* callMakeHttpRequest(action: any): any {
+function* callMakeHttpRequest(
+  action: ReturnType<(typeof commonActions)["makeHttpRequest"]>
+): Generator<unknown, void, any> {
   const {
     payload: { route, type: actionType },
   } = action;
@@ -43,7 +48,7 @@ function* callMakeHttpRequest(action: any): any {
   }
 }
 
-function* callGetApiToken(): any {
+function* callGetApiToken(): Generator<unknown, void, any> {
   const request = new Request(`${host}${apiVersion}${routes.getToken}`);
   try {
     const resObj: Response = yield fetch(request);

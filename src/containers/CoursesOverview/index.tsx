@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { NavigateFunction, useNavigate } from "react-router-dom";
 import { bindActionCreators, Dispatch } from "redux";
 import { connect, ConnectedProps } from "react-redux";
 import { Grid, Typography, Button } from "@material-ui/core";
@@ -7,7 +7,7 @@ import { useTheme } from "@material-ui/core/styles";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import { Loader, CourceCard } from "../../components";
 import { IRootState } from "../../store/models";
-import CoursesOverviewActions from "./logic/actions";
+import { CoursesOverviewActions } from "./logic/actions";
 import { ICoursesOvervieReducer } from "./logic/models";
 import { COURSES_PER_PAGE } from "./config";
 
@@ -19,8 +19,8 @@ export interface ICoursesOverview extends ConnectedProps<typeof connector> {
 }
 
 const Courses = ({ actions, courses }: ICoursesOverview) => {
-  const [corsesOnPage, setCoursesOnPage] = useState(COURSES_PER_PAGE);
-  const navigate = useNavigate();
+  const [corsesOnPage, setCoursesOnPage] = useState<number>(COURSES_PER_PAGE);
+  const navigate: NavigateFunction = useNavigate();
 
   useEffect(() => {
     actions.getCourcesOverview();
@@ -34,7 +34,7 @@ const Courses = ({ actions, courses }: ICoursesOverview) => {
     navigate(`/courses/${id}`);
   };
 
-  const showLoadMoreButton = corsesOnPage <= (courses.data || []).length;
+  const showLoadMoreButton = corsesOnPage < (courses.data || []).length;
 
   const theme = useTheme();
   const isSmall = useMediaQuery(theme.breakpoints.down("sm"));

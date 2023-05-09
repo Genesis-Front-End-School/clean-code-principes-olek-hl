@@ -1,7 +1,7 @@
 import { takeLatest, put } from "redux-saga/effects";
 import * as types from "./types";
 import { routes } from "../../../api/routes";
-import CommonActions from "../../../store/actions";
+import { Actions as CommonActions } from "../../../store/actions";
 
 function* callGetCoursesList(): any {
   try {
