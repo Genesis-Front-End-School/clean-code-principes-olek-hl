@@ -6,7 +6,9 @@ import { host, apiVersion } from "../api/config";
 import { routes } from "../api/routes";
 import { Actions as commonActions } from "./actions";
 
-function* callValidateJsonResponse(resObj: Response): object {
+function* callValidateJsonResponse(
+  resObj: Response
+): Generator<unknown, unknown, unknown> {
   try {
     const response = yield resObj.json();
     return response;
@@ -17,7 +19,7 @@ function* callValidateJsonResponse(resObj: Response): object {
 
 function* callMakeHttpRequest(
   action: ReturnType<(typeof commonActions)["makeHttpRequest"]>
-): any {
+): Generator<unknown, void, any> {
   const {
     payload: { route, type: actionType },
   } = action;
@@ -46,7 +48,7 @@ function* callMakeHttpRequest(
   }
 }
 
-function* callGetApiToken(): any {
+function* callGetApiToken(): Generator<unknown, void, any> {
   const request = new Request(`${host}${apiVersion}${routes.getToken}`);
   try {
     const resObj: Response = yield fetch(request);

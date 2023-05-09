@@ -51,3 +51,11 @@ export interface IGetLessonProgressArgs {
   courseId: string;
   lessonId: string;
 }
+
+export interface ICourseProgress {
+  courses: Record<string, Record<string, ILessonProgress>>;
+}
+
+export interface ILessonProgress {
+  progress: string;
+}

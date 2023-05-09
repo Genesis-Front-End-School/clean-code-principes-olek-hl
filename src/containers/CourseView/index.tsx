@@ -22,8 +22,8 @@ export interface ICoursesOverview extends ConnectedProps<typeof connector> {
 }
 
 const CourseView = ({ actions, courseData }: ICoursesOverview): JSX.Element => {
-  const [videoLink, setVideoLink] = useState<string>("");
-  const [isVideoPaused, setPaused] = useState<boolean>(false);
+  const [videoLink, setVideoLink] = useState("");
+  const [isVideoPaused, setPaused] = useState(false);
   const location = useLocation();
   const theme = useTheme();
   const isSmall: boolean = useMediaQuery(theme.breakpoints.down("sm"));

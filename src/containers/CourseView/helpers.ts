@@ -1,4 +1,8 @@
-import { ICourseLesson, IGetLessonProgressArgs } from "./logic/models";
+import {
+  ICourseLesson,
+  IGetLessonProgressArgs,
+  ICourseProgress,
+} from "./logic/models";
 
 export const getLocalStorage = (): Storage => {
   return window.localStorage;
@@ -12,7 +16,10 @@ export const getParsedLocalStorageItem = (item: string) => {
   return JSON.parse(getLocalStorageItem(item)) || {};
 };
 
-export const setLocalStorageItem = (item: string, data: object): void => {
+export const setLocalStorageItem = (
+  item: string,
+  data: ICourseProgress
+): void => {
   getLocalStorage().setItem(item, JSON.stringify(data));
 };
 
