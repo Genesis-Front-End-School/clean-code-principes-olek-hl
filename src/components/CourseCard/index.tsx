@@ -10,7 +10,7 @@ import "./styles.css";
 
 export interface ICourseCardProps {
   courseData: ICourseInfo;
-  onCourseClick: (id: string) => void;
+  onCourseClick?: (id: string) => void;
 }
 
 const CourceCard = (props: ICourseCardProps) => {
@@ -39,7 +39,7 @@ const CourceCard = (props: ICourseCardProps) => {
       {isHovered && (
         <VideoComponent
           videoUrl={meta.courseVideoPreview?.link}
-          onVideoClick={() => onCourseClick(id)}
+          onVideoClick={() => onCourseClick?.(id)}
           playerRef={playerRef}
         />
       )}

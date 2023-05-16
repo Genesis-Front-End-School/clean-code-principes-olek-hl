@@ -15,7 +15,10 @@ import {
 
 import "./styles.css";
 
-const LessonImageCell = ({ previewImageLink, order }: ILessonImageProps) => {
+export const LessonImageCell = ({
+  previewImageLink,
+  order,
+}: ILessonImageProps) => {
   return (
     <div className="lesson-image-cell cell">
       <img
@@ -26,7 +29,7 @@ const LessonImageCell = ({ previewImageLink, order }: ILessonImageProps) => {
   );
 };
 
-const LessonStatusIconCell = ({
+export const LessonStatusIconCell = ({
   isLocked,
   isPlaying,
   isPaused,
@@ -40,7 +43,7 @@ const LessonStatusIconCell = ({
   return <PlayCircle />;
 };
 
-const LessonDurationCell = ({ duration }: ILessonDurationProps) => {
+export const LessonDurationCell = ({ duration }: ILessonDurationProps) => {
   return (
     <div className="lesson-duration-cell cell">
       <Typography variant="h6" component="span" style={typoCommonStyles}>
@@ -50,7 +53,7 @@ const LessonDurationCell = ({ duration }: ILessonDurationProps) => {
   );
 };
 
-const LessonTitleCell = ({
+export const LessonTitleCell = ({
   title,
   isSmall,
   isCurrentlyPlaying,
@@ -72,7 +75,7 @@ const LessonTitleCell = ({
   );
 };
 
-const LessonProgressCell = ({
+export const LessonProgressCell = ({
   progressValue,
   isSmall,
 }: ILessonProgressCellProps) => {
@@ -85,7 +88,11 @@ const LessonProgressCell = ({
   );
 };
 
-const LessonCurrentlyPlayingCell = ({ isPlaying }: { isPlaying: boolean }) => {
+export const LessonCurrentlyPlayingCell = ({
+  isPlaying,
+}: {
+  isPlaying: boolean;
+}) => {
   return (
     <div className="lesson-currently-playing cell">
       {isPlaying && <Chip label="Currently playing" color={"secondary"} />}
