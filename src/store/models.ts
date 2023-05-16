@@ -5,6 +5,7 @@ import { ICourseViewReducer } from "../containers/CourseView/logic/models";
 export interface IRootState {
   coursesOverview: ICoursesOvervieReducer;
   courseView: ICourseViewReducer;
+  theme?: "dark" | "light";
 }
 
 export type ActionsUnion<A extends ActionCreatorsMapObject> = ReturnType<
