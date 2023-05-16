@@ -15,6 +15,7 @@ const CourseCardDetails = ({ rating, tags }: ICardPreviewProps) => {
           value={rating}
           readOnly
           style={{ marginTop: 5, position: "static" }}
+          data-testid="rating"
         />
       </div>
       <div className="course-tags">
