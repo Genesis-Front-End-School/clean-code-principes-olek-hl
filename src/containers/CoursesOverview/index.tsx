@@ -46,7 +46,7 @@ const Courses = ({ actions, courses, appTheme }: ICoursesOverview) => {
 
   const { isFetching, data } = courses;
 
-  if (isFetching || !data || true) {
+  if (isFetching || !data) {
     return <Loader isFullPage isDarkTheme={isDarkTheme} />;
   }
 
