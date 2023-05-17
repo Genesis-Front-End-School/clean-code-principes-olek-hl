@@ -43,10 +43,17 @@ export const LessonStatusIconCell = ({
   return <PlayCircle />;
 };
 
-export const LessonDurationCell = ({ duration }: ILessonDurationProps) => {
+export const LessonDurationCell = ({
+  duration,
+  isDarkTheme,
+}: ILessonDurationProps) => {
   return (
     <div className="lesson-duration-cell cell">
-      <Typography variant="h6" component="span" style={typoCommonStyles}>
+      <Typography
+        variant="h6"
+        component="span"
+        style={{ ...typoCommonStyles, color: isDarkTheme ? "white" : "black" }}
+      >
         {toMinutesAndSeconds(duration)}
       </Typography>
     </div>
@@ -56,6 +63,7 @@ export const LessonDurationCell = ({ duration }: ILessonDurationProps) => {
 export const LessonTitleCell = ({
   title,
   isSmall,
+  isDarkTheme,
   isCurrentlyPlaying,
   link,
 }: ILessonTitleProps) => {
@@ -66,6 +74,7 @@ export const LessonTitleCell = ({
         component="span"
         style={{
           ...typoCommonStyles,
+          color: isDarkTheme ? "white" : "black",
           ...(isSmall && isCurrentlyPlaying(link) && { color: "#9c27b0" }),
         }}
       >
@@ -78,10 +87,17 @@ export const LessonTitleCell = ({
 export const LessonProgressCell = ({
   progressValue,
   isSmall,
+  isDarkTheme,
 }: ILessonProgressCellProps) => {
   return (
     <div className="lesson-progress-cell cell">
-      <Typography variant="caption" component="span">
+      <Typography
+        variant="caption"
+        component="span"
+        style={{
+          color: isDarkTheme ? "white" : "black",
+        }}
+      >
         {`${isSmall ? "" : "Progress: "}${progressValue}%`}
       </Typography>
     </div>
@@ -107,6 +123,7 @@ const CourceLesson = (props: ICourseLessonProps) => {
     isPaused,
     isSmall,
     isLocked,
+    isDarkTheme,
     isCurrentlyPlaying,
     handleLessonClick,
   } = props;
@@ -134,7 +151,9 @@ const CourceLesson = (props: ICourseLessonProps) => {
           isPlaying={isPlaying}
         />
       </div>
-      {!isSmall && <LessonDurationCell duration={duration} />}
+      {!isSmall && (
+        <LessonDurationCell duration={duration} isDarkTheme={isDarkTheme} />
+      )}
       {!isSmall && (
         <LessonImageCell previewImageLink={previewImageLink} order={order} />
       )}
@@ -143,8 +162,13 @@ const CourceLesson = (props: ICourseLessonProps) => {
         isSmall={isSmall}
         isCurrentlyPlaying={isCurrentlyPlaying}
         link={link}
+        isDarkTheme={isDarkTheme}
       />
-      <LessonProgressCell progressValue={progressValue} isSmall={isSmall} />
+      <LessonProgressCell
+        progressValue={progressValue}
+        isSmall={isSmall}
+        isDarkTheme={isDarkTheme}
+      />
       {!isSmall && <LessonCurrentlyPlayingCell isPlaying={isPlaying} />}
     </div>
   );

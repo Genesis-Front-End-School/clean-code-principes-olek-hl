@@ -3,7 +3,10 @@
   flex-direction: column;
   width: 100%;
   overflow: hidden;
-  margin-bottom: 100px;
+  padding-bottom: 100px;
+}
+.overview-wrapper.is-dark-body {
+  background-color: darkslategray;
 }
 .load-more-button {
   width: 145px;

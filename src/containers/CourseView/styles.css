@@ -11,7 +11,7 @@
   width: 80%;
   margin-left: auto;
   margin-right: auto;
-  margin-bottom: 50px;
+  padding-bottom: 50px;
 }
 
 .course-title-rating {
@@ -20,4 +20,10 @@
 }
 .course-lossons-list {
   margin-top: 20px;
+}
+.course-wrapper {
+  background-color: white;
+}
+.course-wrapper.is-dark-theme {
+  background-color: darkslategray;
 }

@@ -13,6 +13,7 @@ export interface ICourseLessonProps {
   isLocked: boolean;
   courseId: string;
   isSmall: boolean;
+  isDarkTheme?: boolean;
   isCurrentlyPlaying: (link: string) => boolean;
   handleLessonClick: (link: string) => void;
 }
@@ -30,6 +31,7 @@ export interface ILessonStatusIconProps {
 
 export interface ILessonDurationProps {
   duration: number;
+  isDarkTheme?: boolean;
 }
 
 export interface ILessonTitleProps {
@@ -37,9 +39,11 @@ export interface ILessonTitleProps {
   isSmall: boolean;
   isCurrentlyPlaying: (link: string) => boolean;
   link: string;
+  isDarkTheme?: boolean;
 }
 
 export interface ILessonProgressCellProps {
   progressValue: number;
   isSmall: boolean;
+  isDarkTheme?: boolean;
 }

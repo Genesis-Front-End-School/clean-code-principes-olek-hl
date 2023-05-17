@@ -1,6 +1,7 @@
 import { useEffect, useState, useRef, RefObject } from "react";
 import { useLocation } from "react-router-dom";
 import { bindActionCreators, Dispatch } from "redux";
+import classNames from "classnames";
 import { Typography, Divider, Chip } from "@material-ui/core";
 import { Rating } from "@material-ui/lab";
 import { useTheme } from "@material-ui/core/styles";
@@ -12,6 +13,7 @@ import { CourseViewActions } from "./logic/actions";
 import { updateProgressInLocalStorage } from "./helpers";
 import { smallScreenStyles, playbackRateCaption } from "./config";
 import { ICourseViewReducer, LessonStatus } from "./logic/models";
+import { AppTheme } from "../AppHeader/logic/models";
 import usePaybackSpeedChange from "../../hooks/usePaybackSpeedChange";
 
 import "./styles.css";
@@ -19,9 +21,14 @@ import "./styles.css";
 export interface ICoursesOverview extends ConnectedProps<typeof connector> {
   actions: typeof CourseViewActions;
   courseData: ICourseViewReducer;
+  appTheme: AppTheme;
 }
 
-const CourseView = ({ actions, courseData }: ICoursesOverview): JSX.Element => {
+const CourseView = ({
+  actions,
+  courseData,
+  appTheme,
+}: ICoursesOverview): JSX.Element => {
   const [videoLink, setVideoLink] = useState<string>("");
   const [isVideoPaused, setPaused] = useState<boolean>(false);
   const location = useLocation();
@@ -29,6 +36,8 @@ const CourseView = ({ actions, courseData }: ICoursesOverview): JSX.Element => {
   const isSmall: boolean = useMediaQuery(theme.breakpoints.down("sm"));
   const playerRef: RefObject<HTMLVideoElement> = useRef(null);
   const playbackSpeed: string = usePaybackSpeedChange(playerRef);
+
+  const isDarkTheme = appTheme === AppTheme.Dark;
 
   const courseId: string = location.pathname.split("/").pop() || "";
 
@@ -80,8 +89,12 @@ const CourseView = ({ actions, courseData }: ICoursesOverview): JSX.Element => {
   }
 
   return (
-    <>
-      <div className={`course-lesson-video ${isSmall ? "small-size" : ""}`}>
+    <div
+      className={classNames("course-wrapper", { "is-dark-theme": isDarkTheme })}
+    >
+      <div
+        className={classNames("course-lesson-video", { "small-size": isSmall })}
+      >
         <VideoComponent
           controls
           autoPlay
@@ -99,6 +112,7 @@ const CourseView = ({ actions, courseData }: ICoursesOverview): JSX.Element => {
             component="div"
             style={{
               margin: "15px 15px 15px 0",
+              color: isDarkTheme ? "white" : "black",
               ...(isSmall && smallScreenStyles),
             }}
           >
@@ -119,6 +133,7 @@ const CourseView = ({ actions, courseData }: ICoursesOverview): JSX.Element => {
               component="p"
               style={{
                 margin: "15px 0",
+                color: isDarkTheme ? "white" : "black",
               }}
             >
               {courseData.data?.description}
@@ -137,16 +152,18 @@ const CourseView = ({ actions, courseData }: ICoursesOverview): JSX.Element => {
               handleLessonClick={handleLessonClick}
               isSmall={isSmall}
               isLocked={lesson.status === LessonStatus.Locked}
+              isDarkTheme={isDarkTheme}
             />
           ))}
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
 const mapStateToProps = (state: IRootState) => ({
   courseData: state.courseView,
+  appTheme: state.settings.theme,
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({

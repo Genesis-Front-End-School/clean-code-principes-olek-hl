@@ -3,6 +3,7 @@ import { fireEvent, render } from "@testing-library/react";
 import CourceCard, { ICourseCardProps } from "../index";
 
 export const mockCourseInfo: ICourseCardProps = {
+  isDarkTheme: false,
   courseData: {
     id: "123",
     title: "Mock Course",

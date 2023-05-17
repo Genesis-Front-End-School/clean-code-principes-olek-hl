@@ -1,0 +1,11 @@
+.app-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  padding: 10px;
+  border-bottom: 1px solid black;
+}
+.app-header.is-dark-header {
+  background-color: darkslategray;
+  border-bottom: 1px solid white;
+}

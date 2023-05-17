@@ -10,6 +10,7 @@ import "./styles.css";
 
 export interface ICourseCardProps {
   courseData: ICourseInfo;
+  isDarkTheme: boolean;
   onCourseClick?: (id: string) => void;
 }
 
@@ -28,6 +29,7 @@ const CourceCard = (props: ICourseCardProps) => {
   const {
     courseData: { title, meta, id, previewImageLink, rating, tags },
     onCourseClick,
+    isDarkTheme,
   } = props;
 
   return (
@@ -47,7 +49,14 @@ const CourceCard = (props: ICourseCardProps) => {
         <CourseCardPreview previewImageLink={previewImageLink} />
         <Divider />
         <div className="course-title">
-          <Typography variant="h6" component="div" style={commonTypoStyles}>
+          <Typography
+            variant="h6"
+            component="div"
+            style={{
+              ...commonTypoStyles,
+              color: isDarkTheme ? "white" : "black",
+            }}
+          >
             {title}
           </Typography>
         </div>
