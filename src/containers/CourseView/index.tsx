@@ -85,7 +85,7 @@ const CourseView = ({
   };
 
   if (isFetching || !data) {
-    return <Loader isFullPage />;
+    return <Loader isFullPage isDarkTheme={isDarkTheme} />;
   }
 
   return (

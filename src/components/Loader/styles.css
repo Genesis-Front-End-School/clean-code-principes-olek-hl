@@ -4,3 +4,9 @@
   align-items: center;
   justify-content: center;
 }
+.is-dark-theme-loader {
+  background-color: darkslategray;
+}
+.is-dark-theme-loader .MuiCircularProgress-root {
+  color: white;
+}
